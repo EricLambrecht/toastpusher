@@ -1,5 +1,5 @@
 # Toast Pusher
-_Toast Pusher_ displays [Pusher channel](https://pusher.com/channels) events as native toast messages instantly on your device.
+_Toast Pusher_ displays [Pusher channel](https://pusher.com/channels) events as native toast messages on your device.
 
 The app is (soon) available on Windows, macOS, iOS & Android.
 
