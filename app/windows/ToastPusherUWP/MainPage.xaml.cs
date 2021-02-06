@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ToastPusherUWP.PusherEvents;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,16 +27,25 @@ namespace ToastPusherUWP
     public sealed partial class MainPage : Page
     {
         private readonly PusherEventList _events = new PusherEventList();
+        private readonly PusherEventConfigList _eventConfigs = new PusherEventConfigList();
         public PusherEventList Events { get { return this._events; } }
+        public PusherEventConfigList EventConfigs { get { return this._eventConfigs; } }
 
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            Debug.WriteLine("Attempting to read config json");
+            var configList = await PusherEventConfigManager.LoadConfigFromRoamingFolder();
+            foreach (PusherEventConfig item in configList)
+            {
+                EventConfigs.Add(item);
+            }
 
             // TODO: This could be pulled from Pusher soon
             Events.Add(new PusherEvent("my_channel", "Event 1", "ABC Printers"));
@@ -56,7 +67,7 @@ namespace ToastPusherUWP
                     break;
 
                 case "Settings":
-                    contentFrame.Navigate(typeof(SettingsPage));
+                    contentFrame.Navigate(typeof(SettingsPage), EventConfigs);
                     break;
             }
         }

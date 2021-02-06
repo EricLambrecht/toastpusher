@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PusherEvents\PusherEvent.cs" />
+    <Compile Include="PusherEvents\PusherEventConfigManager.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
