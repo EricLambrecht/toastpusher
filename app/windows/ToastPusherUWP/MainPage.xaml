@@ -9,6 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <NavigationView x:Name="rootNavigationView"
+ ItemInvoked="RootNavigationView_ItemInvoked" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Notifications" Icon="List" x:Name="Notifications" />
+                <NavigationViewItem Content="Settings" Icon="Setting" x:Name="Settings" />
+            </NavigationView.MenuItems>
+            <NavigationView.Content>
+                <Frame x:Name="contentFrame"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </NavigationView.Content>
+        </NavigationView>
     </Grid>
 </Page>
