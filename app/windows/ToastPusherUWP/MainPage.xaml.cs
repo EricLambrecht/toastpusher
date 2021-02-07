@@ -59,6 +59,8 @@ namespace ToastPusherUWP
             Events.Add(new PusherEvent("my_other_channel", "Special Event", new PusherEventData("North Pole Toy Factory Inc.")));
 
             BeginPusherEventReceptionSession();
+
+            contentFrame.Navigate(typeof(EventListPage), Events);
         }
 
         private void RootNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -107,9 +109,9 @@ namespace ToastPusherUWP
                         pusher.Error += PusherError;
                         ConnectionState connectionState = await pusher.ConnectAsync();
                         Channel myChannel = await pusher.SubscribeAsync(config.ChannelName);
-                        myChannel.Bind(config.EventName, (PusherClient.PusherEvent eventData) =>
+                        myChannel.Bind(config.EventName, async (PusherClient.PusherEvent eventData) =>
                         {
-                            OnPusherEventReceptionAsync(config, eventData);
+                            await OnPusherEventReceptionAsync(config, eventData);
                         });
                     }
                     pusherEventReceptionSession = newSession;
@@ -126,11 +128,15 @@ namespace ToastPusherUWP
         private void PusherConnectionStateChanged(object sender, ConnectionState state)
         {
             Debug.WriteLine("Connection state: " + state.ToString());
+            connectionStatusBorder.Background = new SolidColorBrush(Windows.UI.Colors.DarkSeaGreen);
+            connectionStatusText.Text = "Pusher connection status: " + state.ToString();
         }
 
         private void PusherError(object sender, PusherException error)
         {
             Debug.WriteLine("Pusher Channels Error: " + error.ToString());
+            connectionStatusBorder.Background = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+            connectionStatusText.Text = "Pusher Channels Error: " + error.ToString();
         }
 
         private async Task OnPusherEventReceptionAsync(PusherEventConfig config, PusherClient.PusherEvent rawEvent)

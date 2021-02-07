@@ -16,7 +16,16 @@
                 <NavigationViewItem Content="Settings" Icon="Setting" x:Name="Settings" />
             </NavigationView.MenuItems>
             <NavigationView.Content>
-                <Frame x:Name="contentFrame"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Frame x:Name="contentFrame"/>
+                    <Border x:Name="connectionStatusBorder" Height="40" Background="Gray" VerticalAlignment="Bottom" Grid.Row="1" BorderBrush="Transparent">
+                        <TextBlock x:Name="connectionStatusText" Text="Pusher connection: offline" VerticalAlignment="Center" Padding="16" Foreground="White"/>
+                    </Border>
+                </Grid>
             </NavigationView.Content>
         </NavigationView>
     </Grid>
