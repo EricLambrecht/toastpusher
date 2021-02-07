@@ -29,7 +29,7 @@ namespace ToastPusherUWP
             catch (JsonException e)
             {
                 Debug.WriteLine(e.Message);
-                data = new PusherEventData(pusherClientEvent.Data);
+                data = new PusherEventData(pusherClientEvent.Data, "New Event");
             }
             return new PusherEvent(pusherClientEvent.ChannelName, pusherClientEvent.EventName, data);
         }
@@ -37,12 +37,22 @@ namespace ToastPusherUWP
 
     public class PusherEventData
     {
-        public PusherEventData(string message)
+        public PusherEventData(string message, string headline = "New Event")
         {
             Message = message;
+            Headline = headline;
         }
 
         [JsonProperty(PropertyName= "message", Required = Required.Always)]
         public string Message { get; }
+
+        string _headline;
+
+        [JsonProperty(PropertyName = "headline")]
+        public string Headline
+        {
+            get { return _headline; }
+            set { _headline = value == null ? "New Event" : value; }
+        }
     }
 }

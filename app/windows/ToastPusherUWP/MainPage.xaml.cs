@@ -152,6 +152,8 @@ namespace ToastPusherUWP
             {
                 Events.Add(pusherEvent);
             });
+
+            SpawnEventToast(pusherEvent);
         }
 
         void EndPusherEventReceptionSession()
@@ -181,6 +183,22 @@ namespace ToastPusherUWP
 
                 EndPusherEventReceptionSession();
             });
+        }
+
+        private void SpawnEventToast(PusherEvent pusherEvent)
+        {
+            // Construct the content
+            var content = new ToastContentBuilder()
+                .AddToastActivationInfo(pusherEvent.EventData.Message, ToastActivationType.Foreground)
+                .AddText(pusherEvent.EventData.Headline)
+                .AddText(pusherEvent.EventData.Message)
+                .GetToastContent();
+
+            // Create the notification
+            var notif = new ToastNotification(content.GetXml());
+
+            // And show it!
+            ToastNotificationManager.CreateToastNotifier().Show(notif);
         }
     }
 }
