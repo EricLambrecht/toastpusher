@@ -10,7 +10,16 @@
 
     <Grid>
         <StackPanel Name="EventsPanel">
-            <ListView Name="EventList"></ListView>
+            <ListView Name="EventList" Padding="0,16">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="local:PusherEvent">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Padding="4" Margin="0,4,0,4" AutomationProperties.Name="{x:Bind EventData.Message}">
+                            <TextBlock Text="{x:Bind EventData.Headline}" Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+                            <TextBlock Text="{x:Bind EventData.Message}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>
