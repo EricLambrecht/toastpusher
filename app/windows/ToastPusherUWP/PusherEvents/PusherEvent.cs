@@ -17,7 +17,7 @@ namespace ToastPusherUWP
         public string EventName { get; }
         public PusherEventData EventData { get;  }
 
-        public override string ToString() => $"({Channel}, {EventName}, {EventData.Message})";
+        public override string ToString() => $"{EventData.Headline}: {EventData.Message} (channel: {Channel}, event: {EventName})";
 
         static public PusherEvent From(PusherClient.PusherEvent pusherClientEvent)
         {
@@ -52,7 +52,7 @@ namespace ToastPusherUWP
         public string Headline
         {
             get { return _headline; }
-            set { _headline = value == null ? "New Event" : value; }
+            set { _headline = value ?? "New Event"; }
         }
     }
 }
