@@ -23,7 +23,20 @@
                     </Grid.RowDefinitions>
                     <Frame x:Name="contentFrame"/>
                     <Border x:Name="connectionStatusBorder" Height="40" Background="Gray" VerticalAlignment="Bottom" Grid.Row="1" BorderBrush="Transparent">
-                        <TextBlock x:Name="connectionStatusText" Text="Pusher connection: offline" VerticalAlignment="Center" Padding="16" Foreground="White"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Padding="16,0">
+                                <TextBlock Text="Pusher connection:" Foreground="White" Margin="0,0,6,0"/>
+                                <TextBlock x:Name="connectionStatusText" Text="offline" Foreground="White"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Padding="16,0">
+                                <TextBlock Text="Activation:" Foreground="White" Margin="0,0,6,0"/>
+                                <TextBlock x:Name="activationText" Text="Activation" Foreground="White"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Padding="16,0">
+                                <TextBlock Text="Running on startup:" Foreground="White" Margin="0,0,6,0"/>
+                                <TextBlock x:Name="startupTaskStatusText" Text="Startup" Foreground="White"/>
+                            </StackPanel>
+                        </StackPanel>
                     </Border>
                 </Grid>
             </NavigationView.Content>

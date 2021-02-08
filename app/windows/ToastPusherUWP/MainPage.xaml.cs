@@ -23,6 +23,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Notifications;
 using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.ApplicationModel;
+using Windows.UI.Popups;
 
 // Die Elementvorlage "Leere Seite" wird unter https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x407 dokumentiert.
 
@@ -47,6 +49,19 @@ namespace ToastPusherUWP
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            string payload = e.Parameter as string;
+            if (!string.IsNullOrEmpty(payload))
+            {
+                activationText.Text = payload;
+
+                if (payload == "StartupTask")
+                {
+                    startupTaskStatusText.Text = "Enabled";
+                }
+            }
+
+            await CheckStartupTaskAccessAsync();
 
             Debug.WriteLine("Attempting to read config json");
             var configList = await PusherEventConfigManager.LoadConfigFromRoamingFolder();
@@ -79,7 +94,8 @@ namespace ToastPusherUWP
                     break;
 
                 case "Settings":
-                    contentFrame.Navigate(typeof(SettingsPage), EventConfigs);
+                    var payload = new MainPageNavigationPayload<PusherEventConfigList>(this, EventConfigs);
+                    contentFrame.Navigate(typeof(SettingsPage), payload);
                     break;
             }
         }
@@ -131,14 +147,14 @@ namespace ToastPusherUWP
         {
             Debug.WriteLine("Connection state: " + state.ToString());
             connectionStatusBorder.Background = new SolidColorBrush(Windows.UI.Colors.DarkSeaGreen);
-            connectionStatusText.Text = "Pusher connection status: " + state.ToString();
+            connectionStatusText.Text = state.ToString();
         }
 
         private void PusherError(object sender, PusherException error)
         {
             Debug.WriteLine("Pusher Channels Error: " + error.ToString());
             connectionStatusBorder.Background = new SolidColorBrush(Windows.UI.Colors.DarkRed);
-            connectionStatusText.Text = "Pusher Channels Error: " + error.ToString();
+            connectionStatusText.Text = "Error: " + error.ToString();
         }
 
         private async Task OnPusherEventReceptionAsync(PusherEventConfig config, PusherClient.PusherEvent rawEvent)
@@ -199,6 +215,71 @@ namespace ToastPusherUWP
 
             // And show it!
             ToastNotificationManager.CreateToastNotifier().Show(notif);
+        }
+
+        private async Task CheckStartupTaskAccessAsync()
+        {
+            StartupTask startupTask = await StartupTask.GetAsync("ToastPusherStartupTask");
+            startupTaskStatusText.Text = startupTask.State.ToString();
+            switch (startupTask.State)
+            {
+                case StartupTaskState.Disabled:
+                    // Task is disabled but can be enabled.
+                    StartupTaskState newState = await startupTask.RequestEnableAsync();
+                    startupTaskStatusText.Text = newState.ToString();
+                    Debug.WriteLine("Request to enable startup, result = {0}", newState);
+                    break;
+                case StartupTaskState.DisabledByUser:
+                    // Task is disabled and user must enable it manually.
+                    startupTaskStatusText.Text = "Was actively disabled";
+                    break;
+                case StartupTaskState.DisabledByPolicy:
+                    Debug.WriteLine(
+                        "Startup disabled by group policy, or not supported on this device");
+                    break;
+                case StartupTaskState.Enabled:
+                    Debug.WriteLine("Startup is enabled.");
+                    break;
+            }
+        }
+
+        public async Task<StartupTaskState> AskForStartupTaskAccessAsync()
+        {
+            StartupTask startupTask = await StartupTask.GetAsync("ToastPusherStartupTask");
+            startupTaskStatusText.Text = startupTask.State.ToString();
+            StartupTaskState newState = await startupTask.RequestEnableAsync();
+            switch (startupTask.State)
+            {
+                case StartupTaskState.DisabledByUser:
+                    // Task is disabled and user must enable it manually.
+                    var dialog = new MessageDialog(
+                        "Since you explicitely disabled launching Toast Pusher on startup, " +
+                        "you can now only re-activate it manually via the \"Startup\" tab in Task Manager due " +
+                        "to a Windows policy. You will have to restart the app in order to see the changes take effect.",
+                        "Startup must be enabled in Task Manager");
+                    await dialog.ShowAsync();
+                    break;
+                case StartupTaskState.DisabledByPolicy:
+                    var dialog2 = new MessageDialog(
+                         "You cannot activate startup, because it was disabled by a system policy. You will have to ask your administrator to enable it.",
+                         "Startup was disabled by policy");
+                    await dialog2.ShowAsync();
+                    break;
+                case StartupTaskState.Enabled:
+                    Debug.WriteLine("Startup is already enabled.");
+                    break;
+            }
+            startupTaskStatusText.Text = newState.ToString();
+            return startupTask.State;
+        }
+
+        public async Task<StartupTaskState> DisableStartupTask()
+        {
+            StartupTask startupTask = await StartupTask.GetAsync("ToastPusherStartupTask");
+            startupTask.Disable();
+            Debug.WriteLine("disabled startup task");
+            startupTaskStatusText.Text = StartupTaskState.Disabled.ToString();
+            return StartupTaskState.Disabled;
         }
     }
 }

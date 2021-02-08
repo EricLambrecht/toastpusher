@@ -4,6 +4,7 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
   IgnorableNamespaces="uap mp">
 
   <Identity
@@ -32,14 +33,22 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="ToastPusherUWP.App">
       <uap:VisualElements
-        DisplayName="ToastPusherUWP"
+        DisplayName="Toast Pusher"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="ToastPusherUWP"
+        Description="App for Windows/macOS/iOS/Android that displays Pusher channel events in a toast message."
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap5:Extension Category="windows.startupTask">
+          <uap5:StartupTask
+            TaskId="ToastPusherStartupTask"
+            Enabled="false"
+            DisplayName="Toast Pusher" />
+        </uap5:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
