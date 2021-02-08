@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0748B68025D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */; };
+		0748B68125D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */; };
+		0748B68725D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */; };
+		0748B68825D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */; };
+		0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
+		0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
 		07882CAE25D154DA00E1D6AF /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07882CAD25D154DA00E1D6AF /* Tests_iOS.swift */; };
 		07882CB925D154DA00E1D6AF /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07882CB825D154DA00E1D6AF /* Tests_macOS.swift */; };
 		07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07882C8F25D154D800E1D6AF /* Toast_Pusher.xcdatamodeld */; };
@@ -19,6 +25,10 @@
 		07882CC225D154DA00E1D6AF /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07882C9325D154D800E1D6AF /* Persistence.swift */; };
 		07882CC325D154DA00E1D6AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07882C9425D154D900E1D6AF /* Assets.xcassets */; };
 		07882CC425D154DA00E1D6AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07882C9425D154D900E1D6AF /* Assets.xcassets */; };
+		0793360F25D1738100C8CE02 /* PusherEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793360E25D1738100C8CE02 /* PusherEventListView.swift */; };
+		0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793360E25D1738100C8CE02 /* PusherEventListView.swift */; };
+		0793361625D1739A00C8CE02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView.swift */; };
+		0793361725D1739A00C8CE02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPusherConfigItemSheet.swift; sourceTree = "<group>"; };
+		0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherConfigItemForm.swift; sourceTree = "<group>"; };
+		0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPusherConfigItemSheet.swift; sourceTree = "<group>"; };
 		07882C9025D154D800E1D6AF /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		07882C9125D154D800E1D6AF /* Toast_PusherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast_PusherApp.swift; sourceTree = "<group>"; };
 		07882C9225D154D800E1D6AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +69,8 @@
 		07882CB825D154DA00E1D6AF /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		07882CBA25D154DA00E1D6AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0793360925D1615800C8CE02 /* Toast Pusher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Toast Pusher.entitlements"; sourceTree = "<group>"; };
+		0793360E25D1738100C8CE02 /* PusherEventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherEventListView.swift; sourceTree = "<group>"; };
+		0793361525D1739A00C8CE02 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +121,16 @@
 		07882C8E25D154D800E1D6AF /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */,
 				07882C9125D154D800E1D6AF /* Toast_PusherApp.swift */,
 				07882C9225D154D800E1D6AF /* ContentView.swift */,
 				07882C9325D154D800E1D6AF /* Persistence.swift */,
 				07882C9425D154D900E1D6AF /* Assets.xcassets */,
 				07882C8F25D154D800E1D6AF /* Toast_Pusher.xcdatamodeld */,
+				0793360E25D1738100C8CE02 /* PusherEventListView.swift */,
+				0793361525D1739A00C8CE02 /* SettingsView.swift */,
+				0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */,
+				0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -319,9 +339,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				07882CBD25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
+				0748B68025D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
 				07882CC125D154DA00E1D6AF /* Persistence.swift in Sources */,
 				07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
+				0793361625D1739A00C8CE02 /* SettingsView.swift in Sources */,
+				0748B68725D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */,
+				0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
 				07882CBF25D154DA00E1D6AF /* ContentView.swift in Sources */,
+				0793360F25D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,9 +355,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				07882CBE25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
+				0748B68125D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
 				07882CC225D154DA00E1D6AF /* Persistence.swift in Sources */,
 				07882CBC25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
+				0793361725D1739A00C8CE02 /* SettingsView.swift in Sources */,
+				0748B68825D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */,
+				0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
 				07882CC025D154DA00E1D6AF /* ContentView.swift in Sources */,
+				0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

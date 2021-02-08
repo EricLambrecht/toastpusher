@@ -13,9 +13,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for i in 0..<10 {
+            let newItem = PusherConfigItem(context: viewContext)
+            newItem.creationDate = Date()
+            newItem.channelName = "channel \(i)"
+            newItem.eventName = "event \(i)"
+            newItem.appKey = "app key \(i)"
+            newItem.appCluster = "app cluster \(i)"
         }
         do {
             try viewContext.save()
