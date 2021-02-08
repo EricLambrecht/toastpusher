@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-struct PusherEventListView: View {    
+struct PusherEventListView: View {
+    @EnvironmentObject var pusherManager: PusherInstanceManager
     var body: some View {
-        Text("Hello, Pusher Event List!")
+        List() {
+            ForEach(pusherManager.events, id: \.self) { event in
+                Text("\(event.headline ?? "NO HEADLINE"), \(event.message)")
+            }
+        }
     }
 }
 

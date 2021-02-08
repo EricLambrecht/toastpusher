@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Toast_PusherApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var pusherController = PusherInstanceManager.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(pusherController)
         }
     }
 }

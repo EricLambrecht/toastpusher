@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,9 @@
 		0748B68825D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */; };
 		0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
 		0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
+		0748B6A125D1B75100A928E7 /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0748B6A025D1B75100A928E7 /* PusherSwift */; };
+		0748B6A725D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */; };
+		0748B6A825D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */; };
 		07882CAE25D154DA00E1D6AF /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07882CAD25D154DA00E1D6AF /* Tests_iOS.swift */; };
 		07882CB925D154DA00E1D6AF /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07882CB825D154DA00E1D6AF /* Tests_macOS.swift */; };
 		07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07882C8F25D154D800E1D6AF /* Toast_Pusher.xcdatamodeld */; };
@@ -29,6 +32,11 @@
 		0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793360E25D1738100C8CE02 /* PusherEventListView.swift */; };
 		0793361625D1739A00C8CE02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView.swift */; };
 		0793361725D1739A00C8CE02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView.swift */; };
+		07D7E83A25D1C1AA0040D18C /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 07D7E83925D1C1AA0040D18C /* PusherSwift */; };
+		07D7E84025D1CBD50040D18C /* PusherInstanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */; };
+		07D7E84125D1CBD50040D18C /* PusherInstanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */; };
+		07D7E84B25D1D00D0040D18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E84A25D1D00D0040D18C /* AppDelegate.swift */; };
+		07D7E84C25D1D00D0040D18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E84A25D1D00D0040D18C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +60,7 @@
 		0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPusherConfigItemSheet.swift; sourceTree = "<group>"; };
 		0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherConfigItemForm.swift; sourceTree = "<group>"; };
 		0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPusherConfigItemSheet.swift; sourceTree = "<group>"; };
+		0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		07882C9025D154D800E1D6AF /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		07882C9125D154D800E1D6AF /* Toast_PusherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast_PusherApp.swift; sourceTree = "<group>"; };
 		07882C9225D154D800E1D6AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +80,8 @@
 		0793360925D1615800C8CE02 /* Toast Pusher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Toast Pusher.entitlements"; sourceTree = "<group>"; };
 		0793360E25D1738100C8CE02 /* PusherEventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherEventListView.swift; sourceTree = "<group>"; };
 		0793361525D1739A00C8CE02 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherInstanceManager.swift; sourceTree = "<group>"; };
+		07D7E84A25D1D00D0040D18C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0748B6A125D1B75100A928E7 /* PusherSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D7E83A25D1C1AA0040D18C /* PusherSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +128,7 @@
 				07882CAC25D154DA00E1D6AF /* Tests iOS */,
 				07882CB725D154DA00E1D6AF /* Tests macOS */,
 				07882C9A25D154D900E1D6AF /* Products */,
+				07D7E83825D1C1AA0040D18C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +145,9 @@
 				0793361525D1739A00C8CE02 /* SettingsView.swift */,
 				0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */,
 				0748B68625D1980E00A928E7 /* PusherConfigItemForm.swift */,
+				0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */,
+				07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */,
+				07D7E84A25D1D00D0040D18C /* AppDelegate.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -181,6 +198,13 @@
 			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
+		07D7E83825D1C1AA0040D18C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -197,6 +221,9 @@
 			dependencies = (
 			);
 			name = "Toast Pusher (iOS)";
+			packageProductDependencies = (
+				0748B6A025D1B75100A928E7 /* PusherSwift */,
+			);
 			productName = "Toast Pusher (iOS)";
 			productReference = 07882C9925D154D900E1D6AF /* Toast Pusher.app */;
 			productType = "com.apple.product-type.application";
@@ -214,6 +241,9 @@
 			dependencies = (
 			);
 			name = "Toast Pusher (macOS)";
+			packageProductDependencies = (
+				07D7E83925D1C1AA0040D18C /* PusherSwift */,
+			);
 			productName = "Toast Pusher (macOS)";
 			productReference = 07882CA125D154DA00E1D6AF /* Toast Pusher.app */;
 			productType = "com.apple.product-type.application";
@@ -288,6 +318,9 @@
 				Base,
 			);
 			mainGroup = 07882C8925D154D800E1D6AF;
+			packageReferences = (
+				0748B69F25D1B75100A928E7 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */,
+			);
 			productRefGroup = 07882C9A25D154D900E1D6AF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -338,13 +371,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D7E84B25D1D00D0040D18C /* AppDelegate.swift in Sources */,
 				07882CBD25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
 				0748B68025D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
+				0748B6A725D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */,
 				07882CC125D154DA00E1D6AF /* Persistence.swift in Sources */,
 				07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
 				0793361625D1739A00C8CE02 /* SettingsView.swift in Sources */,
 				0748B68725D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */,
 				0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
+				07D7E84025D1CBD50040D18C /* PusherInstanceManager.swift in Sources */,
 				07882CBF25D154DA00E1D6AF /* ContentView.swift in Sources */,
 				0793360F25D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 			);
@@ -354,13 +390,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D7E84C25D1D00D0040D18C /* AppDelegate.swift in Sources */,
 				07882CBE25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
 				0748B68125D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
+				0748B6A825D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */,
 				07882CC225D154DA00E1D6AF /* Persistence.swift in Sources */,
 				07882CBC25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
 				0793361725D1739A00C8CE02 /* SettingsView.swift in Sources */,
 				0748B68825D1980E00A928E7 /* PusherConfigItemForm.swift in Sources */,
 				0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
+				07D7E84125D1CBD50040D18C /* PusherInstanceManager.swift in Sources */,
 				07882CC025D154DA00E1D6AF /* ContentView.swift in Sources */,
 				0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 			);
@@ -734,6 +773,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0748B69F25D1B75100A928E7 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pusher/pusher-websocket-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0748B6A025D1B75100A928E7 /* PusherSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0748B69F25D1B75100A928E7 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */;
+			productName = PusherSwift;
+		};
+		07D7E83925D1C1AA0040D18C /* PusherSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0748B69F25D1B75100A928E7 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */;
+			productName = PusherSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		07882C8F25D154D800E1D6AF /* Toast_Pusher.xcdatamodeld */ = {
