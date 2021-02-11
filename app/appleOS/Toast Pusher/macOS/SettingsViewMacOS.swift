@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsViewMacOS.swift
 //  Toast Pusher
 //
 //  Created by Eric Lambrecht on 08.02.21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsViewMacOS: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -95,9 +95,8 @@ struct SettingsView: View {
     }
 }
 
-
-struct SettingsView_Previews: PreviewProvider {
+struct SettingsViewMacOS_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        SettingsViewMacOS().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

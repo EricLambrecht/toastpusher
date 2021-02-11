@@ -18,7 +18,7 @@ class LocalNotificationManager: ObservableObject {
             if granted == true && error == nil {
                 print("Notifications permitted")
             } else {
-                print("Notifications not permitted")
+                print("Notifications not permitted, \(error.debugDescription)")
             }
         }
     }

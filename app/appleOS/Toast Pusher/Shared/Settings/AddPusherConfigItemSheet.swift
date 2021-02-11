@@ -14,6 +14,7 @@ struct AddPusherConfigItemSheet: View {
     
     let clusterNames = ["us", "eu"]
     var onAdd: OnAdd
+    var onCancel: () -> Void
         
     @State var selectedClusterIndex = 1
     @State var appKey = ""
@@ -21,10 +22,20 @@ struct AddPusherConfigItemSheet: View {
     @State var eventName = ""
     
     var body: some View {
+        #if os(macOS)
         PusherConfigItemForm(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
             onAdd(appKey, clusterNames[selectedClusterIndex], channelName, eventName)
-        })
-        .navigationTitle("Add Event Config")
+        }, onCancel: onCancel)
+        .navigationTitle("New Event Config")
+        .frame(minWidth: 350, maxWidth: 350)
+        .padding(14)
+        #else
+        PusherConfigItemForm(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
+            onAdd(appKey, clusterNames[selectedClusterIndex], channelName, eventName)
+        }, onCancel: onCancel)
+        .navigationTitle("New Event Config")
+        #endif
+        
     }
 }
 
@@ -32,9 +43,9 @@ struct AddPusherConfigItemSheet_Previews: PreviewProvider {
     static var previews: some View {
         #if os(iOS)
         NavigationView {
-            AddPusherConfigItemSheet()
+            AddPusherConfigItemSheet(onAdd: { _,_,_,_ in print("saved") }, onCancel: { print("onCancel") })
         }
         #endif
-        AddPusherConfigItemSheet(onAdd: { _,_,_,_ in print("saved") })
+        AddPusherConfigItemSheet(onAdd: { _,_,_,_ in print("saved") }, onCancel: { print("onCancel") })
     }
 }

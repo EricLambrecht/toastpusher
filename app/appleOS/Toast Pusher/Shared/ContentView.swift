@@ -23,17 +23,22 @@ struct ContentView: View {
     @State var pusherRefs = [UUID: Pusher]()
     
     var body: some View {
-        TabView {
+        NavigationView {
+            #if os(macOS)
+            VStack {
+                List {
+                    NavigationLink(destination: PusherEventListView()) {
+                        Label("Events", systemImage: "list.bullet")
+                    }
+                    NavigationLink(destination: SettingsView()) {
+                        Label("Settings", systemImage: "gearshape")
+                    }
+                }
+                .listStyle(SidebarListStyle())
+               
+            }
+            #endif
             PusherEventListView()
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("Notifications")
-                }
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Settings")
-                }
         }
         .font(.headline)
         .onAppear(perform: {
@@ -46,6 +51,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        Group {
+            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .environmentObject(PusherInstanceManager.shared)
+            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .environmentObject(PusherInstanceManager.shared)
+        }
     }
 }
