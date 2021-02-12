@@ -10,28 +10,6 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for i in 0..<10 {
-            let newItem = PusherConfigItem(context: viewContext)
-            newItem.creationDate = Date()
-            newItem.channelName = "channel \(i)"
-            newItem.eventName = "event \(i)"
-            newItem.appKey = "app key \(i)"
-            newItem.appCluster = "app cluster \(i)"
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
-
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
@@ -53,7 +31,33 @@ struct PersistenceController {
                 Check the error message to determine what the actual problem was.
                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
+            } else {
+                print("persistent stores have been loaded!")
             }
         })
     }
+    
+    // Preview only code
+    
+    static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        for i in 0..<10 {
+            let newItem = PusherConfigItem(context: viewContext)
+            newItem.creationDate = Date()
+            newItem.channelName = "channel \(i)"
+            newItem.eventName = "event \(i)"
+            newItem.appKey = "app key \(i)"
+            newItem.appCluster = "app cluster \(i)"
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
 }

@@ -2,132 +2,68 @@
 //  SettingsView.swift
 //  Toast Pusher
 //
-//  Created by Eric Lambrecht on 08.02.21.
+//  Created by Eric Lambrecht on 11.02.21.
 //
 
 import SwiftUI
+import CoreData
+import Combine
 
 struct SettingsView: View {
-    @EnvironmentObject var pusherManager: PusherInstanceManager
-
     @Environment(\.managedObjectContext) private var viewContext
-
-    #if os(iOS)
-    @Environment(\.editMode) var editMode
-    private var isEditing: Bool {
-        editMode?.wrappedValue.isEditing ?? false
+    @ObservedObject var model: SettingsViewModel
+    
+    init(viewContext: NSManagedObjectContext) {
+        model = SettingsViewModel(context: viewContext)
     }
-    #endif
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \PusherConfigItem.creationDate, ascending: true)],
-        animation: .default)
-    private var pusherConfigItems: FetchedResults<PusherConfigItem>
-    
-    @State var selection: PusherConfigItem? = nil
-    @State var showConfigItemSheet = false
     
     var body: some View {
-        VStack {
-            List(selection: $selection) {
-                ForEach(pusherConfigItems, id: \.self) { item in
-                    Text("\(item.channelName ?? "unknown"), \(item.eventName ?? "event")")
+        if $model.isFetchingSettings.wrappedValue { ProgressView()
+        } else {
+            VStack {
+                #if os(macOS)
+                PusherBeamConfigForm(instanceId: $model.instanceId, interest: $model.interest).padding(20)
+                #else
+                PusherBeamConfigForm(instanceId: $model.instanceId, interest: $model.interest)
+                #endif
+                Button("Apply Settings", action: apply).keyboardShortcut(.defaultAction)
+                if $model.moreThanOneConfigFound.wrappedValue {
+                    Text("Warning: Settings are corrupted. You should reset the settings and restart the app.").font(.callout)
                 }
-                .onDelete(perform: deleteConfigItem)
             }
-            .toolbar {
-                ToolbarItem() {
-                    HStack {
-                        Button(action: {
-                            if selection != nil {
-                                guard let idx = pusherConfigItems.firstIndex(of: selection!) else { return }
-                                deleteConfigItem(offsets: [idx])
-                            }
-                        }){
-                            Label("Delete Item", systemImage: "trash")
-                        }.disabled(selection == nil)
-                        #if os(iOS)
-                        Button(action: {
-                            withAnimation {
-                                editMode?.wrappedValue = isEditing ? .inactive : .active
-                            }
-                        }) {
-                            Label("Edit Items", systemImage: isEditing ? "pencil.circle.fill" : "pencil.circle")
-                        }
-                        #endif
-                        Button(action: {
-                            showConfigItemSheet = true
-                        }) {
-                            Label("Add Item", systemImage: "plus")
-                        }
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: deleteSettings) {
+                        Text("Reset Settings")
                     }
+                    .keyboardShortcut(.cancelAction)
+                    .foregroundColor(.red)
                 }
             }
             .navigationTitle("Settings")
         }
-        .sheet(isPresented: $showConfigItemSheet) {
-            AddPusherConfigItemSheet(onAdd: { appKey, appCluster, channelName, eventName in
-                addConfigItem(appKey: appKey, appCluster: appCluster, channelName: channelName, eventName: eventName)
-                showConfigItemSheet = false
-            }, onCancel: { showConfigItemSheet = false })
-        }
     }
     
-    private func addConfigItem(appKey: String, appCluster: String, channelName: String, eventName: String) {
-        withAnimation {
-            let newItem = PusherConfigItem(context: viewContext)
-            newItem.creationDate = Date()
-            newItem.id = UUID()
-            newItem.channelName = channelName
-            newItem.eventName = eventName
-            newItem.appKey = appKey
-            newItem.appCluster = appCluster
-
-            do {
-                try viewContext.save()
-                pusherManager.subscribe(to: newItem)
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    func apply() {
+        print("view: \($model.instanceId.wrappedValue), \($model.interest.wrappedValue)")
+        model.applyCurrentSettings()
     }
-
-    private func deleteConfigItem(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { pusherConfigItems[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    
+    func deleteSettings() {
+        model.deleteSettings()
     }
 }
 
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        #if os(iOS)
+        #if os(macOS)
         NavigationView {
-            Text("sidebar")
-            SettingsView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .environment(\.editMode, .constant(EditMode.inactive))
-            .environmentObject(PusherInstanceManager.shared)
+            Text("Sidebar")
+            SettingsView(viewContext: PersistenceController.preview.container.viewContext)
         }
         #else
         NavigationView {
-            Text("sidebar")
-            SettingsView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .environmentObject(PusherInstanceManager.shared)
+            SettingsView(viewContext: PersistenceController.preview.container.viewContext)
         }
         #endif
     }

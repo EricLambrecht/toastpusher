@@ -39,6 +39,8 @@ class PusherInstanceManager: PusherDelegate, ObservableObject {
     }
     
     public func subscribe(to item: PusherConfigItem) {
+        return
+        // TODO: Delete this class
         guard let appKey = item.appKey, let appCluster = item.appCluster, let channelName = item.channelName, let eventName = item.eventName, let id = item.id
         else { return }
         
@@ -81,6 +83,8 @@ class PusherInstanceManager: PusherDelegate, ObservableObject {
     }
     
     public func unsubscribe(from item: PusherConfigItem) {
+        return
+        // TODO: Delete this class
         guard let appKey = item.appKey, let appCluster = item.appCluster, let channelName = item.channelName, let eventName = item.eventName, let id = item.id
         else { return }
         

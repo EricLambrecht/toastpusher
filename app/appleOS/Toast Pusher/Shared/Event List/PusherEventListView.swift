@@ -33,7 +33,7 @@ struct PusherEventListView: View {
         .toolbar {
             #if os(iOS)
             ToolbarItem(placement: .automatic) {
-                NavigationLink(destination: SettingsView()) {
+                NavigationLink(destination: SettingsView_Legacy_PusherChannels()) {
                     Text("Settings")
                 }
             }

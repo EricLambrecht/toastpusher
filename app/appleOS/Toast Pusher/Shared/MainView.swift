@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 import PusherSwift
 
-struct ContentView: View {
+struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var pusherManager: PusherInstanceManager
     
@@ -30,7 +30,7 @@ struct ContentView: View {
                     NavigationLink(destination: PusherEventListView()) {
                         Label("Events", systemImage: "list.bullet")
                     }
-                    NavigationLink(destination: SettingsView()) {
+                    NavigationLink(destination: SettingsView(viewContext: viewContext)) {
                         Label("Settings", systemImage: "gearshape")
                     }
                 }
@@ -40,7 +40,6 @@ struct ContentView: View {
             #endif
             PusherEventListView()
         }
-        .font(.headline)
         .onAppear(perform: {
             for item in pusherConfigItems {
                 pusherManager.subscribe(to: item)
@@ -51,11 +50,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                .environmentObject(PusherInstanceManager.shared)
-            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                .environmentObject(PusherInstanceManager.shared)
-        }
+        MainView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(PusherInstanceManager.shared)
+    
     }
 }

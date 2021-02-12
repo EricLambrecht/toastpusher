@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="PusherBeamConfig" representedClassName="PusherBeamConfig" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="instanceID" optional="YES" attributeType="String"/>
+        <attribute name="interests" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+    </entity>
     <entity name="PusherConfigItem" representedClassName="PusherConfigItem" syncable="YES" codeGenerationType="class">
         <attribute name="appCluster" optional="YES" attributeType="String"/>
         <attribute name="appKey" optional="YES" attributeType="String"/>
@@ -10,5 +16,6 @@
     </entity>
     <elements>
         <element name="PusherConfigItem" positionX="-63" positionY="-9" width="128" height="119"/>
+        <element name="PusherBeamConfig" positionX="-63" positionY="36" width="128" height="89"/>
     </elements>
 </model>
