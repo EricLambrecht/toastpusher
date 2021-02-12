@@ -23,14 +23,14 @@ struct AddPusherConfigItemSheet: View {
     
     var body: some View {
         #if os(macOS)
-        PusherConfigItemForm(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
+        PusherConfigItemForm_Legacy(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
             onAdd(appKey, clusterNames[selectedClusterIndex], channelName, eventName)
         }, onCancel: onCancel)
         .navigationTitle("New Event Config")
         .frame(minWidth: 350, maxWidth: 350)
         .padding(14)
         #else
-        PusherConfigItemForm(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
+        PusherConfigItemForm_Legacy(selectedClusterIndex: $selectedClusterIndex, appKey: $appKey, channelName: $channelName, eventName: $eventName, onAdd: {
             onAdd(appKey, clusterNames[selectedClusterIndex], channelName, eventName)
         }, onCancel: onCancel)
         .navigationTitle("New Event Config")

@@ -8,29 +8,32 @@
 import Foundation
 import PusherSwift
 
-struct ToastPusherNotificationEvent: Decodable, Hashable {
+/// `ToastPusherNotificationEvent_Legacy` is deprecated
+struct ToastPusherNotificationEvent_Legacy: Decodable, Hashable {
     var message: String
     var headline: String?
 }
 
+
 typealias AppKeyClusterString = String
 typealias CallbackID = String
 
+/// `PusherInstanceManager` is deprecated
 class PusherInstanceManager: PusherDelegate, ObservableObject {
     var pusherRefs = [AppKeyClusterString: Pusher]()
     var subscribedChannels = [String: PusherChannel]()
     var boundEventCallbacks = [String: CallbackID]()
     
-    @Published var events = [ToastPusherNotificationEvent]()
+    @Published var events = [ToastPusherNotificationEvent_Legacy]()
     @Published var connectionStatus = ""
     
     static let shared = PusherInstanceManager()
     
     static let preview: PusherInstanceManager = {
         let previewInstance = PusherInstanceManager()
-        previewInstance.events.append(ToastPusherNotificationEvent(message: "Message with headline", headline: "The headline"))
-        previewInstance.events.append(ToastPusherNotificationEvent(message: "Message without headline"))
-        previewInstance.events.append(ToastPusherNotificationEvent(message: "Message with url: https://google.de", headline: "With URL"))
+        previewInstance.events.append(ToastPusherNotificationEvent_Legacy(message: "Message with headline", headline: "The headline"))
+        previewInstance.events.append(ToastPusherNotificationEvent_Legacy(message: "Message without headline"))
+        previewInstance.events.append(ToastPusherNotificationEvent_Legacy(message: "Message with url: https://google.de", headline: "With URL"))
         return previewInstance
     }()
     
@@ -69,12 +72,12 @@ class PusherInstanceManager: PusherDelegate, ObservableObject {
         }
         
         let callbackId = channel.bind(eventName: eventName, eventCallback: { event in
-            var notificationEvent: ToastPusherNotificationEvent
+            var notificationEvent: ToastPusherNotificationEvent_Legacy
             guard let data = event.data else { return }
             do {
-                notificationEvent = try JSONDecoder().decode(ToastPusherNotificationEvent.self, from: data.data(using: .utf8)!)
+                notificationEvent = try JSONDecoder().decode(ToastPusherNotificationEvent_Legacy.self, from: data.data(using: .utf8)!)
             } catch {
-                notificationEvent = ToastPusherNotificationEvent(message: data)
+                notificationEvent = ToastPusherNotificationEvent_Legacy(message: data)
             }
             print("event detected, data: \(data)")
             self.events.append(notificationEvent)

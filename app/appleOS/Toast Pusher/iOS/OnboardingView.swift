@@ -24,7 +24,7 @@ struct OnboardingView: View {
                         .frame(width: 120.0, height: 120.0)
                         .fixedSize()
                         .padding(10)
-                    Text("Toast Pusher").font(.system(size: 24)).padding(16)
+                    Text("Toast Pusher").font(.title).padding(16)
                     VStack(alignment: .leading) {
                         Form {
                             Section(header: Text("Pusher Beam Settings").padding(.top, 12)) {
@@ -52,7 +52,7 @@ struct OnboardingView: View {
                     }
                     .background(Color.init(UIColor.secondarySystemBackground))
                     .ignoresSafeArea()
-                    .frame(maxHeight: geometry.size.height/2)
+                    .frame(maxHeight: geometry.size.height/2 + 60)
                 }
             }
             .toolbar {

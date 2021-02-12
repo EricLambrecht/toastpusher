@@ -14,8 +14,18 @@ struct PusherBeamConfigForm: View {
     var body: some View {
         Form {
             Section(header: Text("Pusher Beam Settings")) {
-                TextField("Instance ID", text: $instanceId).font(.body)
-                TextField("interest", text: $interest).font(.body)
+                HStack {
+                    Text("Instance ID")
+                        .foregroundColor(.gray)
+                        .frame(width: 90, alignment: .leading)
+                    TextField("12345678-5abc32-...", text: $instanceId).font(.body)
+                }
+                HStack {
+                    Text("Interest")
+                        .foregroundColor(.gray)
+                        .frame(width: 90, alignment: .leading)
+                    TextField("my-interest", text: $interest).font(.body)
+                }
             }
         }
     }
@@ -23,6 +33,6 @@ struct PusherBeamConfigForm: View {
 
 struct PusherBeamConfigForm_Previews: PreviewProvider {
     static var previews: some View {
-        PusherBeamConfigForm(instanceId: .constant("ahadh2i7qzei7gids"), interest: .constant("my_interest"))
+        PusherBeamConfigForm(instanceId: .constant("12345678-5abc32-ahadh2i7qzei7gids"), interest: .constant("my_interest"))
     }
 }

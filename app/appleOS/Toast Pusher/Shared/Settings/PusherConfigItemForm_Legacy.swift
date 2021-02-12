@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PusherConfigItemForm: View {
+struct PusherConfigItemForm_Legacy: View {
     let clusterNames = ["us", "eu"]
         
     @Binding var selectedClusterIndex: Int
@@ -55,6 +55,6 @@ struct PusherConfigItemForm: View {
 
 struct PusherConfigItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        PusherConfigItemForm(selectedClusterIndex: .constant(1), appKey: .constant("ahadh2i7qzei7gids"), channelName: .constant("my_channel"), eventName: .constant("my_event"), onAdd: { print("saved") }, onCancel: { print("cancelled") })
+        PusherConfigItemForm_Legacy(selectedClusterIndex: .constant(1), appKey: .constant("ahadh2i7qzei7gids"), channelName: .constant("my_channel"), eventName: .constant("my_event"), onAdd: { print("saved") }, onCancel: { print("cancelled") })
     }
 }

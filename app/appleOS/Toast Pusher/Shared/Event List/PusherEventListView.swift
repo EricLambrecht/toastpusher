@@ -8,33 +8,48 @@
 import SwiftUI
 
 struct PusherEventListView: View {
-    @EnvironmentObject var pusherManager: PusherInstanceManager
-    @State var selection: ToastPusherNotificationEvent? = nil
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var eventState: EventState
+    @EnvironmentObject var appState: AppState
+    @State var selection: ToastPusherNotificationEvent_Legacy? = nil
     @State var showInfo = false
     var body: some View {
-        List(selection: $selection) {
-            ForEach(pusherManager.events, id: \.self) { event in
-                VStack(alignment: .leading) {
-                    Text("\(event.headline ?? "NO HEADLINE")")
-                        .font(.headline)
-                    Text(event.message)
-                        .font(.subheadline)
+        VStack {
+            if eventState.events.count > 0 {
+                List(selection: $selection) {
+                    ForEach(eventState.events, id: \.self) { event in
+                        EventListRow(event: event)
+                            .listRowInsets(EdgeInsets())
+                        #if os(macOS)
+                        Divider()
+                        #endif
+                    }
                 }
-                .padding(10)
-                .cornerRadius(4)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1)
-                        .offset(x: 1, y: 0)
-                )
+                .listStyle(PlainListStyle())
+            } else {
+                if appState.notificationsPermitted {
+                    Text("Waiting for incoming events...")
+                        .foregroundColor(.gray)
+                } else {
+                    Text("You have to allow notifications in otder to use this app!")
+                        .foregroundColor(.red)
+                }
             }
         }
         .navigationTitle("Events")
         .toolbar {
+            ToolbarItem(placement: .status) {
+                HStack {
+                    Text("Pusher Connection:")
+                    Circle()
+                        .fill(getConnectionCircleColor())
+                        .frame(width: 12, height: 12)
+                }.foregroundColor(.gray)
+            }
             #if os(iOS)
             ToolbarItem(placement: .automatic) {
-                NavigationLink(destination: SettingsView_Legacy_PusherChannels()) {
-                    Text("Settings")
+                NavigationLink(destination: SettingsView(viewContext: viewContext)) {
+                    Label("Settings", systemImage: "gearshape")
                 }
             }
             ToolbarItem(placement: .navigation) {
@@ -49,16 +64,30 @@ struct PusherEventListView: View {
                 }.disabled(showInfo == true)
             }
             #endif
-            ToolbarItem(placement: .status) {
-                HStack {
-                    Text("Pusher Connection:")
-                    Text(pusherManager.connectionStatus)
-                }.foregroundColor(.gray)
-            }
         }
         .sheet(isPresented: $showInfo) {
             AboutView(onClose: { showInfo = false })
         }
+    }
+    
+    func getConnectionCircleColor() -> Color {
+        var red: Color, green: Color, yellow: Color
+        #if os(iOS)
+        green = Color(UIColor.systemGreen)
+        red = Color(UIColor.systemRed)
+        yellow = Color.yellow
+        #else
+        green = Color.green
+        red = Color.red
+        yellow = Color.yellow
+        #endif
+        if (!self.appState.pusherInitialized) {
+            return red
+        }
+        if (!self.appState.notificationsPermitted) {
+            return yellow
+        }
+        return green
     }
 }
 
@@ -69,6 +98,9 @@ struct PusherEventListView_Previews: PreviewProvider {
             Text("sidebar")
             #endif
             PusherEventListView()
-        }.environmentObject(PusherInstanceManager.preview)
+        }
+        .environmentObject(EventState.previewFilled)
+        .environmentObject(AppState.preview)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

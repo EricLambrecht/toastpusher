@@ -19,34 +19,39 @@ class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate {
     // Inherit from a common class in iOS/macOS delegates that contains the pushNotifications code
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        print("app did finish launching - macos")
+        print("APP: did finish launching - macos")
         self.initializePusherBeamsFromAppSettings()
     }
     
     func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("app token registered - macos")
-        self.pushNotifications.registerDeviceToken(deviceToken)
+        print("APP: device token registered - macos")
+        self.registerDeviceToken(deviceToken: deviceToken)
     }
 
-    private func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        self.pushNotifications.handleNotification(userInfo: userInfo)
+    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String: Any]) {
+        print("APP: did receive remote notification - macos")
+        print(userInfo.keys)
+        self.handleIncomingPushNotification(userInfo: userInfo)
     }
 }
 #else
 class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("app did finish launching - ios")
+        print("APP: did finish launching - ios")
         self.initializePusherBeamsFromAppSettings()
         return true
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("app token registered - ios")
-        self.pushNotifications.registerDeviceToken(deviceToken)
+        print("APP: device token registered - ios")
+        self.registerDeviceToken(deviceToken: deviceToken)
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        self.pushNotifications.handleNotification(userInfo: userInfo)
+        print("APP: did receive remote notification - ios")
+        print(userInfo.keys)
+        self.handleIncomingPushNotification(userInfo: userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
 }
 #endif
@@ -55,7 +60,6 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate {
 struct Toast_PusherApp: App {
     let persistenceController = PersistenceController.shared
     let pushNotifications = PushNotifications.shared
-    let appState = AppState()
     @StateObject var pusherController = PusherInstanceManager.shared
     #if os(macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -65,10 +69,11 @@ struct Toast_PusherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView()
+            EntryGuard()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(pusherController)
-                .environmentObject(appState)
+                .environmentObject(appDelegate.appState)
+                .environmentObject(appDelegate.eventState)
         }
     }
 }

@@ -11,8 +11,17 @@ struct AboutView: View {
     var onClose: () -> Void
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).font(.headline)
-            Text("This is Toast Pusher")
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 120.0, height: 120.0)
+                .fixedSize()
+                .padding(10)
+            Text("Toast Pusher").font(.title)
+            Text("Version 0.1.0")
+                .font(.subheadline)
+                .foregroundColor(.blue)
+                .padding(.top, 2)
         }
         .padding(40)
         .navigationTitle("About Toast Pusher")
