@@ -18,7 +18,7 @@ struct AboutView: View {
                 .fixedSize()
                 .padding(10)
             Text("Toast Pusher").font(.title)
-            Text("Version 0.1.0")
+            Text("Version 0.1.1")
                 .font(.subheadline)
                 .foregroundColor(.blue)
                 .padding(.top, 2)
