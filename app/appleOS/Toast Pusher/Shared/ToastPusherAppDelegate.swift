@@ -10,6 +10,7 @@ import PushNotifications
 import SwiftUI
 import CoreData
 import UserNotifications
+import Combine
 #if os(macOS)
 import AppKit
 #else
@@ -42,63 +43,95 @@ class ToastPusherAppDelegate: NSObject {
     lazy var viewContext = persistenceController.container.viewContext
     lazy var appState = AppState()
     lazy var eventState = EventState()
+    var onboardingSceneSubscription: AnyCancellable?
     
     // TODO: React to onboarding finished change in AppState and initialize pusher beam then.
     
-    internal func initializePusherBeamsFromAppSettings() {
+    internal func initApp() {
+        print("APP: Initializing app")
+        checkNotificationsAccess() {
+            let validConfigs = self.getValidPusherBeamSettings()
+            if (validConfigs.count == 0) {
+                self.redirectToOnboardingScreen()
+                print("APP: Waiting for user to leave onboarding scene...")
+                self.onboardingSceneSubscription = self.appState.$showOnboardingScene.receive(on: DispatchQueue.main).sink { value in
+                    // Try again after onboarding scene was left
+                    if value == false {
+                        print("APP: ...onboarding scene was left!")
+                        self.initApp()
+                    }
+                }
+            } else {
+                self.onboardingSceneSubscription?.cancel()
+                self.intializePusherBeams(fromSettings: validConfigs)
+            }
+            self.appState.isLoading = false
+        }
+    }
+    
+    internal func getValidPusherBeamSettings() -> [PusherBeamConfig] {
         let fetchRequest: NSFetchRequest<PusherBeamConfig> = PusherBeamConfig.fetchRequest()
         let objects = try? viewContext.fetch(fetchRequest)
         if let configList: [PusherBeamConfig] = objects {
             if (configList.count == 0) {
-                redirectToOnboardingScreen()
-                return
+                return []
             }
             
             let validConfigs = configList.filter { config in config.instanceID != nil && !config.interests!.isEmpty }
             if (validConfigs.count == 0) {
-                redirectToOnboardingScreen()
-                return
+                return []
             }
             
-            for config in configList {
-                self.pushNotifications.start(instanceId: config.instanceID!)
-                self.pushNotifications.registerForRemoteNotifications()
-                
-                for interest in config.interests! {
-                    try? self.pushNotifications.addDeviceInterest(interest: interest)
-                }
+            return validConfigs
+        }
+        print("APP: Fetch request failed, because the list is not even there: ask user to try again later!")
+        return []
+    }
+    
+    internal func intializePusherBeams(fromSettings configList: [PusherBeamConfig]) {
+        print("APP: Initializing Pusher Beams")
+        for config in configList {
+            self.pushNotifications.start(instanceId: config.instanceID!)
+            self.pushNotifications.registerForRemoteNotifications()
+            
+            for interest in config.interests! {
+                try? self.pushNotifications.addDeviceInterest(interest: interest)
             }
-            UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-              if settings.authorizationStatus == .authorized {
-                // Notifications are allowed
-                print("APP: Notifications are allowed")
-                DispatchQueue.main.async {
-                    self.appState.notificationsPermitted = true
-                }
-              }
-              else {
-                // Either denied or notDetermined
-                print("APP: Notifications are disabled! Asking...")
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-                    if granted == true && error == nil {
-                        print("APP: Notifications permitted")
-                        DispatchQueue.main.async {
-                            self.appState.notificationsPermitted = true
-                        }
-                    } else {
-                        print("APP: Notifications not permitted, \(error.debugDescription)")
-                        DispatchQueue.main.async {
-                            self.appState.notificationsPermitted = false
-                        }
+        }
+        appState.pusherInitialized = true
+    }
+    
+    internal func checkNotificationsAccess(_ onCompletion: @escaping () -> Void) {
+        print("APP: Checking notifications access")
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+          if settings.authorizationStatus == .authorized {
+            // Notifications are allowed
+            print("APP: Notifications are allowed")
+            DispatchQueue.main.async {
+                self.appState.notificationsPermitted = true
+                onCompletion()
+            }
+          }
+          else {
+            // Either denied or notDetermined
+            print("APP: Notifications are disabled! Asking...")
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+                if granted == true && error == nil {
+                    print("APP: Notifications permitted")
+                    DispatchQueue.main.async {
+                        self.appState.notificationsPermitted = true
+                        onCompletion()
+                    }
+                } else {
+                    print("APP: Notifications not permitted, \(error.debugDescription)")
+                    DispatchQueue.main.async {
+                        self.appState.notificationsPermitted = false
+                        onCompletion()
                     }
                 }
-              }
             }
-            appState.pusherInitialized = true
-        } else {
-            print("APP: Fetch request failed, because the list is not even there: ask user to try again later!")
+          }
         }
-        appState.isLoading = false
     }
     
     internal func registerDeviceToken(deviceToken: Data) {

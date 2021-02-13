@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PushNotifications
+import UserNotifications
 #if os(macOS)
 import AppKit
 #else
@@ -14,13 +15,14 @@ import UIKit
 #endif
 
 #if os(macOS)
-class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate {
+class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     // TODO:
     // Inherit from a common class in iOS/macOS delegates that contains the pushNotifications code
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         print("APP: did finish launching - macos")
-        self.initializePusherBeamsFromAppSettings()
+        UNUserNotificationCenter.current().delegate = self
+        self.initApp()
     }
     
     func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -30,15 +32,30 @@ class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate {
 
     func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String: Any]) {
         print("APP: did receive remote notification - macos")
-        print(userInfo.keys)
         self.handleIncomingPushNotification(userInfo: userInfo)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("APP: did receive remote notification in foreground, playing sound - macos")
+        print(notification.request.content)
+        self.handleIncomingPushNotification(userInfo: notification.request.content.userInfo)
+        // Decide how the notification (that was received in the foreground)
+        // should be presented to the user
+        completionHandler(UNNotificationPresentationOptions.sound)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Handle the user interaction with the notification
+        print("APP: user interacted with notification - macos")
+        completionHandler()
     }
 }
 #else
-class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate {
+class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("APP: did finish launching - ios")
-        self.initializePusherBeamsFromAppSettings()
+        UNUserNotificationCenter.current().delegate = self
+        self.initApp()
         return true
     }
     
@@ -49,9 +66,23 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("APP: did receive remote notification - ios")
-        print(userInfo.keys)
         self.handleIncomingPushNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Decide how the notification (that was received in the foreground)
+        // should be presented to the user
+        print("APP: did receive remote notification in foreground - ios")
+        print(notification.request.content)
+        self.handleIncomingPushNotification(userInfo: notification.request.content.userInfo)
+        completionHandler(UNNotificationPresentationOptions.sound)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Handle the user interaction with the notification
+        print("APP: user interacted with notification - ios")
+        completionHandler()
     }
 }
 #endif
