@@ -23,6 +23,9 @@ class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate, UNUserNotifica
         print("APP: did finish launching - macos")
         UNUserNotificationCenter.current().delegate = self
         self.initApp()
+        if notification.userInfo != nil {
+            self.handleIncomingPushNotification(userInfo: notification.userInfo!)
+        }
     }
     
     func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -47,6 +50,7 @@ class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate, UNUserNotifica
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle the user interaction with the notification
         print("APP: user interacted with notification - macos")
+        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo)
         completionHandler()
     }
 }
@@ -82,6 +86,7 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate, UNUserNotifica
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle the user interaction with the notification
         print("APP: user interacted with notification - ios")
+        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo)
         completionHandler()
     }
 }

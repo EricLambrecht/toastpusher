@@ -158,6 +158,12 @@ class ToastPusherAppDelegate: NSObject {
         if let url = pusherData["url"] as? String {
             event.url = URL(string: url)
         }
+        if eventState.events.contains(where: { existingEvent in
+            return existingEvent.publishId == event.publishId
+        }) {
+            print("APP: Skipping – event was already handled")
+            return
+        }
         eventState.events.append(event)
     }
     
