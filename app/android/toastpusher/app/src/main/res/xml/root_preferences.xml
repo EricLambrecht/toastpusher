@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="@string/settings_pusher_header">
+
+        <EditTextPreference
+            app:key="instance_id_setting"
+            app:title="@string/settings_pusher_instance_id_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="interest_setting"
+            app:title="@string/settings_pusher_interest_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

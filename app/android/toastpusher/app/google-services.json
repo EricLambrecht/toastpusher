@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49283774769",
+    "project_id": "toast-pusher",
+    "storage_bucket": "toast-pusher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49283774769:android:257a85aba805b0b52fd810",
+        "android_client_info": {
+          "package_name": "com.ericlambrecht.toastpusher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49283774769-bj4r3mobs9etd0tt3funsvr8ng58ekqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXd85yVf46sjbSgofQdLfoXC51Ac9TV8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49283774769-bj4r3mobs9etd0tt3funsvr8ng58ekqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
