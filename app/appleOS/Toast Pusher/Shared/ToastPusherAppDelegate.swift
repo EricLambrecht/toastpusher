@@ -139,7 +139,7 @@ class ToastPusherAppDelegate: NSObject {
         print("APP: did register device token")
     }
     
-    internal func handleIncomingPushNotification(userInfo: [AnyHashable: Any]) {
+    internal func handleIncomingPushNotification(userInfo: [AnyHashable: Any], highlight: Bool = false) {
         self.pushNotifications.handleNotification(userInfo: userInfo)
         guard
             let apsData = userInfo["aps"] as? [String: Any],
@@ -150,6 +150,7 @@ class ToastPusherAppDelegate: NSObject {
             let title = alertData["title"] as? String,
             let body = alertData["body"] as? String
         else { return }
+        
         print("APP: userinfo \(userInfo)")
         var event = ToastPusherNotificationEvent(
             publishId: publishId,
@@ -158,13 +159,23 @@ class ToastPusherAppDelegate: NSObject {
         if let url = pusherData["url"] as? String {
             event.url = URL(string: url)
         }
-        if eventState.events.contains(where: { existingEvent in
-            return existingEvent.publishId == event.publishId
-        }) {
-            print("APP: Skipping – event was already handled")
-            return
+        if let dateString = pusherData["date"] as? String {
+            print("found date \(dateString)")
+            let formatter = ISO8601DateFormatter()
+            event.date = formatter.date(from: dateString)
         }
-        eventState.events.append(event)
+        
+        let existingEventIndex = eventState.events.firstIndex(of: event)
+        if existingEventIndex != nil {
+            event = eventState.events[existingEventIndex!]
+        } else {
+            eventState.events.insert(event, at: 0)
+        }
+        
+        eventState.markEventAsNew(by: event.publishId)
+        if highlight {
+            eventState.highlightEvent(by: event.publishId)
+        }
     }
     
     private func redirectToOnboardingScreen() {

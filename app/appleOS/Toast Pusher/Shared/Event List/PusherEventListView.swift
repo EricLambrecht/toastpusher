@@ -18,7 +18,10 @@ struct PusherEventListView: View {
             if eventState.events.count > 0 {
                 List(selection: $selection) {
                     ForEach(eventState.events, id: \.self) { event in
-                        EventListRow(event: event)
+                        EventListRow(
+                            event: event,
+                            new: eventState.newEventPublishIds.contains(event.publishId),
+                            highlighted: event.publishId == eventState.highlightedEventPublishId)
                             .listRowInsets(EdgeInsets())
                         #if os(macOS)
                         Divider()

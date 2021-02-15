@@ -50,7 +50,7 @@ class AppDelegate: ToastPusherAppDelegate, NSApplicationDelegate, UNUserNotifica
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle the user interaction with the notification
         print("APP: user interacted with notification - macos")
-        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo)
+        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo, highlight: true)
         completionHandler()
     }
 }
@@ -86,7 +86,7 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate, UNUserNotifica
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle the user interaction with the notification
         print("APP: user interacted with notification - ios")
-        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo)
+        self.handleIncomingPushNotification(userInfo: response.notification.request.content.userInfo, highlight: true)
         completionHandler()
     }
 }
@@ -94,6 +94,7 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate, UNUserNotifica
 
 @main
 struct Toast_PusherApp: App {
+    @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
     let pushNotifications = PushNotifications.shared
     #if os(macOS)
@@ -108,6 +109,22 @@ struct Toast_PusherApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(appDelegate.appState)
                 .environmentObject(appDelegate.eventState)
+                .onChange(of: scenePhase) { phase in
+                    switch phase {
+                    case .background:
+                        print("APP: moving to background")
+                        appDelegate.eventState.markAllEventsAsOld()
+                        return
+                    case .inactive:
+                        print("APP: becoming inactive")
+                        return
+                    case .active:
+                        print("APP: becoming active")
+                        return
+                    @unknown default:
+                        return
+                    }
+                }
         }
     }
 }

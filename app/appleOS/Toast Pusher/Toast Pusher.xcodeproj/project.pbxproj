@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07165B6C25DAD0890003B4EF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07165B6B25DAD0890003B4EF /* DateExtension.swift */; };
+		07165B6D25DAD0890003B4EF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07165B6B25DAD0890003B4EF /* DateExtension.swift */; };
 		0748B6A125D1B75100A928E7 /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0748B6A025D1B75100A928E7 /* PusherSwift */; };
 		077C7EF725D582180088DA12 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 077C7EF625D582180088DA12 /* PushNotifications */; };
 		077C7EFD25D5822E0088DA12 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 077C7EFC25D5822E0088DA12 /* PushNotifications */; };
@@ -67,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07165B6B25DAD0890003B4EF /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		0782DAA525D6077F002CB548 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0782DAB025D60913002CB548 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		07882C9025D154D800E1D6AF /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 				07EE4A0825D2D0D900D32B19 /* AboutView.swift */,
 				0789AA8F25D5B786002BBA85 /* ToastPusherAppDelegate.swift */,
 				0789AAA425D5BF43002BBA85 /* EntryGuard.swift */,
+				07165B6B25DAD0890003B4EF /* DateExtension.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -441,6 +445,7 @@
 				0789AA9025D5B786002BBA85 /* ToastPusherAppDelegate.swift in Sources */,
 				07EE4A0925D2D0D900D32B19 /* AboutView.swift in Sources */,
 				07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
+				07165B6C25DAD0890003B4EF /* DateExtension.swift in Sources */,
 				0782DAA625D6077F002CB548 /* AppState.swift in Sources */,
 				0788E85E25D6A76A006C4D6E /* EventListRow.swift in Sources */,
 				0782DAB125D60913002CB548 /* OnboardingView.swift in Sources */,
@@ -463,6 +468,7 @@
 				0789AA9125D5B786002BBA85 /* ToastPusherAppDelegate.swift in Sources */,
 				07EE4A0A25D2D0D900D32B19 /* AboutView.swift in Sources */,
 				07882CBC25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
+				07165B6D25DAD0890003B4EF /* DateExtension.swift in Sources */,
 				0782DAA725D6077F002CB548 /* AppState.swift in Sources */,
 				0788E85F25D6A76A006C4D6E /* EventListRow.swift in Sources */,
 				07882CC025D154DA00E1D6AF /* MainView.swift in Sources */,
@@ -630,7 +636,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ericlambrecht.toastpusher;
 				PRODUCT_NAME = "Toast Pusher";
 				SDKROOT = iphoneos;
@@ -655,7 +661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ericlambrecht.toastpusher;
 				PRODUCT_NAME = "Toast Pusher";
 				SDKROOT = iphoneos;
@@ -683,7 +689,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ericlambrecht.toastpusher;
 				PRODUCT_NAME = "Toast Pusher";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -709,7 +715,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ericlambrecht.toastpusher;
 				PRODUCT_NAME = "Toast Pusher";
 				PROVISIONING_PROFILE_SPECIFIER = "";

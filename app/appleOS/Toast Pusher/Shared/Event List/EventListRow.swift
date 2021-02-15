@@ -9,14 +9,24 @@ import SwiftUI
 
 struct EventListRow: View {
     var event: ToastPusherNotificationEvent
+    var new: Bool
+    var highlighted: Bool
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Spacer()
-                Text(event.title)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                HStack(alignment: .bottom) {
+                    Text(event.title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                    if event.date != nil {
+                        Text(event.date!.timeAgoDisplay())
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                            .padding(.bottom, 1)
+                    }
+                }
                 Text(event.body)
                     .font(.subheadline)
                     .lineLimit(getBodyLineLimit())
@@ -33,6 +43,16 @@ struct EventListRow: View {
         }
         .frame(height: getRowHeight())
         .frame(minWidth: 200)
+        .overlay(
+            new ?
+                getNewMarker()
+            : nil
+            , alignment: .topLeading)
+        .overlay(
+            highlighted ? Rectangle()
+                .foregroundColor(.clear)
+            .border(Color.blue, width: 2) : nil
+        )
     }
     
     func getLeadingPadding() -> CGFloat {
@@ -58,11 +78,25 @@ struct EventListRow: View {
         return 1
         #endif
     }
+    
+    func getNewMarker() -> some View {
+        #if os(iOS)
+        return Rectangle()
+            .frame(width: 4, height: getRowHeight() - 8)
+        .padding(4)
+            .foregroundColor(.green)
+        #else
+        return Rectangle()
+            .frame(width: 2, height: getRowHeight() - 8)
+            .padding(.vertical, 4)
+            .foregroundColor(.green)
+        #endif
+    }
 }
 
 struct EventListRow_Previews: PreviewProvider {
     static var previews: some View {
-        EventListRow(event: ToastPusherNotificationEvent(publishId: "id", body: "Message Body that is extremely long and I dont know", title: "The Title", url: URL(string: "https://google.de")))
+        EventListRow(event: ToastPusherNotificationEvent(publishId: "id", body: "Message Body that is extremely long and I dont know", title: "eBay Kleinanzeigen", url: URL(string: "https://google.de"), date: Date()), new: true, highlighted: false)
             .previewLayout(.sizeThatFits)
     }
 }
