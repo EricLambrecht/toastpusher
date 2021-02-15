@@ -4,19 +4,28 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.pusher.pushnotifications.PushNotifications;
+import com.ericlambrecht.toastpusher.notifications.NotificationDataHolder
+import com.ericlambrecht.toastpusher.notifications.NotificationItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.messaging.RemoteMessage
+import com.pusher.pushnotifications.PushNotificationReceivedListener
+import com.pusher.pushnotifications.PushNotifications
+import java.lang.Exception
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private val preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences: SharedPreferences, s: String ->
             onSharedPreferenceChanged(sharedPreferences, s)
         }
+
+    private val notificationMap: Map<String, NotificationItem> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,29 +45,53 @@ class MainActivity : AppCompatActivity() {
             PushNotifications.start(applicationContext, instanceId)
             PushNotifications.addDeviceInterest(interest)
         }
+        try {
+            intent.extras?.let {
+                val item = NotificationItem.from(it)
+                NotificationDataHolder.addItem(item)
+            }
+        } catch (e: Exception) {
+            Log.i(TAG, "Error: $e")
+        }
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
     fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == "instance_id_setting") {
-            Log.i("toastpusher", "Instance ID value was updated to: " + sharedPreferences.getString(key, ""))
+            Log.i(TAG, "Instance ID value was updated to: " + sharedPreferences.getString(key, ""))
         }
         if (key == "interest_setting") {
-            Log.i("toastpusher", "Interest value was updated to: " + sharedPreferences.getString(key, ""))
+            Log.i(TAG, "Interest value was updated to: " + sharedPreferences.getString(key, ""))
         }
     }
 
     override fun onResume() {
         super.onResume()
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        Log.i("toastpusher", "registering change listener again")
+        Log.i(TAG, "registering change listener again")
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+
+        PushNotifications.setOnMessageReceivedListenerForVisibleActivity(
+            this,
+            object : PushNotificationReceivedListener {
+                override fun onMessageReceived(remoteMessage: RemoteMessage) {
+                    Log.i(TAG, "message received!")
+                    try {
+                        remoteMessage.let {
+                            val item = NotificationItem.from(it)
+                            NotificationDataHolder.addItem(item)
+                        }
+                    } catch (e: Exception) {
+                        Log.i(TAG, "Error: $e")
+                    }
+                }
+            })
     }
 
     override fun onPause() {
         super.onPause()
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        Log.i("toastpusher", "unregistering change listener")
+        Log.i(TAG, "unregistering change listener")
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
@@ -79,5 +112,9 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object {
+        private const val TAG = "TP-main-activity"
     }
 }

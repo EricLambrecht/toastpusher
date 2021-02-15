@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ericlambrecht.toastpusher.dummy.DummyContent
+import com.ericlambrecht.toastpusher.notifications.NotificationDataHolder
 
 /**
  * A fragment representing a list of Items.
@@ -36,7 +37,7 @@ class NotificationFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyNotificationRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MyNotificationRecyclerViewAdapter(NotificationDataHolder.getItemList())
             }
         }
         return view

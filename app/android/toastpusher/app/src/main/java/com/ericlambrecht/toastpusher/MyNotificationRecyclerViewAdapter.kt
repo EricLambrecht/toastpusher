@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.ericlambrecht.toastpusher.dummy.DummyContent.DummyItem
+import com.ericlambrecht.toastpusher.notifications.NotificationItem
+import java.time.format.DateTimeFormatter
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
+ * [RecyclerView.Adapter] that can display a [NotificationItem].
  */
 class MyNotificationRecyclerViewAdapter(
-        private val values: List<DummyItem>)
+        private val values: List<NotificationItem>)
     : RecyclerView.Adapter<MyNotificationRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,18 +25,21 @@ class MyNotificationRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm")
+        holder.dateView.text = item.date.format(formatter)
+        holder.titleView.text = item.title
+        holder.bodyView.text = item.body
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+        val dateView: TextView = view.findViewById(R.id.date)
+        val titleView: TextView = view.findViewById(R.id.title)
+        val bodyView: TextView = view.findViewById(R.id.body)
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + bodyView.text + "'"
         }
     }
 }
