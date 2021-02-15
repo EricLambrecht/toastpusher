@@ -7,15 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0748B68025D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */; };
-		0748B68125D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */; };
-		0748B68725D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B68625D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift */; };
-		0748B68825D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B68625D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift */; };
-		0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
-		0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */; };
 		0748B6A125D1B75100A928E7 /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0748B6A025D1B75100A928E7 /* PusherSwift */; };
-		0748B6A725D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */; };
-		0748B6A825D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */; };
 		077C7EF725D582180088DA12 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 077C7EF625D582180088DA12 /* PushNotifications */; };
 		077C7EFD25D5822E0088DA12 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 077C7EFC25D5822E0088DA12 /* PushNotifications */; };
 		0782DAA625D6077F002CB548 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782DAA525D6077F002CB548 /* AppState.swift */; };
@@ -44,21 +36,15 @@
 		0789AA9F25D5BA0E002BBA85 /* PusherBeamConfigForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AA9D25D5BA0E002BBA85 /* PusherBeamConfigForm.swift */; };
 		0789AAA525D5BF43002BBA85 /* EntryGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAA425D5BF43002BBA85 /* EntryGuard.swift */; };
 		0789AAA625D5BF43002BBA85 /* EntryGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAA425D5BF43002BBA85 /* EntryGuard.swift */; };
-		0789AAB025D5C1D2002BBA85 /* EventList_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAAF25D5C1D2002BBA85 /* EventList_Legacy.swift */; };
-		0789AAB125D5C1D2002BBA85 /* EventList_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAAF25D5C1D2002BBA85 /* EventList_Legacy.swift */; };
 		0789AABB25D5C4EA002BBA85 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AABA25D5C4EA002BBA85 /* SettingsView.swift */; };
 		0789AABC25D5C4EA002BBA85 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AABA25D5C4EA002BBA85 /* SettingsView.swift */; };
 		0789AAC225D5D42C002BBA85 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAC125D5D42C002BBA85 /* SettingsViewModel.swift */; };
 		0789AAC325D5D42C002BBA85 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789AAC125D5D42C002BBA85 /* SettingsViewModel.swift */; };
 		0793360F25D1738100C8CE02 /* PusherEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793360E25D1738100C8CE02 /* PusherEventListView.swift */; };
 		0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793360E25D1738100C8CE02 /* PusherEventListView.swift */; };
-		0793361625D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift */; };
-		0793361725D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793361525D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift */; };
 		07C537C125D69AE600276940 /* EventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C537C025D69AE600276940 /* EventState.swift */; };
 		07C537C225D69AE600276940 /* EventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C537C025D69AE600276940 /* EventState.swift */; };
 		07D7E83A25D1C1AA0040D18C /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 07D7E83925D1C1AA0040D18C /* PusherSwift */; };
-		07D7E84025D1CBD50040D18C /* PusherInstanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */; };
-		07D7E84125D1CBD50040D18C /* PusherInstanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */; };
 		07EE4A0925D2D0D900D32B19 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE4A0825D2D0D900D32B19 /* AboutView.swift */; };
 		07EE4A0A25D2D0D900D32B19 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE4A0825D2D0D900D32B19 /* AboutView.swift */; };
 /* End PBXBuildFile section */
@@ -81,10 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPusherConfigItemSheet.swift; sourceTree = "<group>"; };
-		0748B68625D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherConfigItemForm_Legacy.swift; sourceTree = "<group>"; };
-		0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPusherConfigItemSheet.swift; sourceTree = "<group>"; };
-		0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		0782DAA525D6077F002CB548 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0782DAB025D60913002CB548 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		07882C9025D154D800E1D6AF /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
@@ -110,14 +92,11 @@
 		0789AA9625D5B8BC002BBA85 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0789AA9D25D5BA0E002BBA85 /* PusherBeamConfigForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherBeamConfigForm.swift; sourceTree = "<group>"; };
 		0789AAA425D5BF43002BBA85 /* EntryGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryGuard.swift; sourceTree = "<group>"; };
-		0789AAAF25D5C1D2002BBA85 /* EventList_Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList_Legacy.swift; sourceTree = "<group>"; };
 		0789AABA25D5C4EA002BBA85 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0789AAC125D5D42C002BBA85 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		0793360925D1615800C8CE02 /* Toast Pusher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Toast Pusher.entitlements"; sourceTree = "<group>"; };
 		0793360E25D1738100C8CE02 /* PusherEventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherEventListView.swift; sourceTree = "<group>"; };
-		0793361525D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView_Legacy_PusherChannels.swift; sourceTree = "<group>"; };
 		07C537C025D69AE600276940 /* EventState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventState.swift; sourceTree = "<group>"; };
-		07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherInstanceManager.swift; sourceTree = "<group>"; };
 		07EE4A0825D2D0D900D32B19 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,10 +232,6 @@
 		07D7E85525D1EB4F0040D18C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0793361525D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift */,
-				0748B67F25D1901000A928E7 /* AddPusherConfigItemSheet.swift */,
-				0748B69825D19B2400A928E7 /* EditPusherConfigItemSheet.swift */,
-				0748B68625D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift */,
 				0789AA9D25D5BA0E002BBA85 /* PusherBeamConfigForm.swift */,
 				0789AABA25D5C4EA002BBA85 /* SettingsView.swift */,
 				0789AAC125D5D42C002BBA85 /* SettingsViewModel.swift */,
@@ -269,7 +244,6 @@
 			children = (
 				07C537C025D69AE600276940 /* EventState.swift */,
 				0793360E25D1738100C8CE02 /* PusherEventListView.swift */,
-				0789AAAF25D5C1D2002BBA85 /* EventList_Legacy.swift */,
 				0788E85D25D6A76A006C4D6E /* EventListRow.swift */,
 			);
 			path = "Event List";
@@ -278,7 +252,6 @@
 		07D7E85725D1EB8B0040D18C /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				0748B6A625D1BB9F00A928E7 /* LocalNotificationManager.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -286,7 +259,6 @@
 		07D7E85825D1EB910040D18C /* Pusher */ = {
 			isa = PBXGroup;
 			children = (
-				07D7E83F25D1CBD50040D18C /* PusherInstanceManager.swift */,
 			);
 			path = Pusher;
 			sourceTree = "<group>";
@@ -462,8 +434,6 @@
 			files = (
 				07882CBD25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
 				0789AAC225D5D42C002BBA85 /* SettingsViewModel.swift in Sources */,
-				0748B68025D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
-				0748B6A725D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */,
 				0789AABB25D5C4EA002BBA85 /* SettingsView.swift in Sources */,
 				07C537C125D69AE600276940 /* EventState.swift in Sources */,
 				07882CC125D154DA00E1D6AF /* Persistence.swift in Sources */,
@@ -471,14 +441,9 @@
 				0789AA9025D5B786002BBA85 /* ToastPusherAppDelegate.swift in Sources */,
 				07EE4A0925D2D0D900D32B19 /* AboutView.swift in Sources */,
 				07882CBB25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
-				0793361625D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift in Sources */,
 				0782DAA625D6077F002CB548 /* AppState.swift in Sources */,
 				0788E85E25D6A76A006C4D6E /* EventListRow.swift in Sources */,
-				0789AAB025D5C1D2002BBA85 /* EventList_Legacy.swift in Sources */,
 				0782DAB125D60913002CB548 /* OnboardingView.swift in Sources */,
-				0748B68725D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift in Sources */,
-				0748B69925D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
-				07D7E84025D1CBD50040D18C /* PusherInstanceManager.swift in Sources */,
 				07882CBF25D154DA00E1D6AF /* MainView.swift in Sources */,
 				0793360F25D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 				0789AA9E25D5BA0E002BBA85 /* PusherBeamConfigForm.swift in Sources */,
@@ -491,8 +456,6 @@
 			files = (
 				07882CBE25D154DA00E1D6AF /* Toast_PusherApp.swift in Sources */,
 				0789AAC325D5D42C002BBA85 /* SettingsViewModel.swift in Sources */,
-				0748B68125D1901000A928E7 /* AddPusherConfigItemSheet.swift in Sources */,
-				0748B6A825D1BB9F00A928E7 /* LocalNotificationManager.swift in Sources */,
 				0789AABC25D5C4EA002BBA85 /* SettingsView.swift in Sources */,
 				07C537C225D69AE600276940 /* EventState.swift in Sources */,
 				07882CC225D154DA00E1D6AF /* Persistence.swift in Sources */,
@@ -500,13 +463,8 @@
 				0789AA9125D5B786002BBA85 /* ToastPusherAppDelegate.swift in Sources */,
 				07EE4A0A25D2D0D900D32B19 /* AboutView.swift in Sources */,
 				07882CBC25D154DA00E1D6AF /* Toast_Pusher.xcdatamodeld in Sources */,
-				0793361725D1739A00C8CE02 /* SettingsView_Legacy_PusherChannels.swift in Sources */,
 				0782DAA725D6077F002CB548 /* AppState.swift in Sources */,
 				0788E85F25D6A76A006C4D6E /* EventListRow.swift in Sources */,
-				0789AAB125D5C1D2002BBA85 /* EventList_Legacy.swift in Sources */,
-				0748B68825D1980E00A928E7 /* PusherConfigItemForm_Legacy.swift in Sources */,
-				0748B69A25D19B2400A928E7 /* EditPusherConfigItemSheet.swift in Sources */,
-				07D7E84125D1CBD50040D18C /* PusherInstanceManager.swift in Sources */,
 				07882CC025D154DA00E1D6AF /* MainView.swift in Sources */,
 				0793361025D1738100C8CE02 /* PusherEventListView.swift in Sources */,
 				0789AA9825D5B8BC002BBA85 /* OnboardingView.swift in Sources */,

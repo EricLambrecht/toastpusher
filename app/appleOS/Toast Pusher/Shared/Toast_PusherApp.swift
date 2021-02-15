@@ -96,7 +96,6 @@ class AppDelegate: ToastPusherAppDelegate, UIApplicationDelegate, UNUserNotifica
 struct Toast_PusherApp: App {
     let persistenceController = PersistenceController.shared
     let pushNotifications = PushNotifications.shared
-    @StateObject var pusherController = PusherInstanceManager.shared
     #if os(macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #else
@@ -107,7 +106,6 @@ struct Toast_PusherApp: App {
         WindowGroup {
             EntryGuard()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(pusherController)
                 .environmentObject(appDelegate.appState)
                 .environmentObject(appDelegate.eventState)
         }

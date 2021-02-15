@@ -11,7 +11,7 @@ struct PusherEventListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var eventState: EventState
     @EnvironmentObject var appState: AppState
-    @State var selection: ToastPusherNotificationEvent_Legacy? = nil
+    @State var selection: ToastPusherNotificationEvent? = nil
     @State var showInfo = false
     var body: some View {
         VStack {
